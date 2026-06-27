@@ -1,4 +1,18 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 function Home() {
+  const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  axios.get("http://localhost:5000/api/products")
+    .then((res) => {
+      setProducts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
   return (
     <div>
       {/* Top announcement bar */}
@@ -70,16 +84,11 @@ function Home() {
         <h2 className="text-3xl font-bold mb-8">Explore Our Products</h2>
 
        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[
-            { name: "HAVIT HV-G92 Gamepad", price: "$120" },
-            { name: "AK-900 Wired Keyboard", price: "$960" },
-            { name: "IPS LCD Gaming Monitor", price: "$370" },
-            { name: "S-Series Comfort Chair", price: "$375" },
-          ].map((product, index) => (
+          {products.slice(0, 4).map((product, index) => (
             <div key={index} className="border rounded-lg p-4 hover:shadow-md transition">
-              <div className="bg-gray-100 h-40 flex items-center justify-center rounded mb-4 text-4xl">
-                📦
-              </div>
+              <div className="bg-gray-100 h-40 flex items-center justify-center rounded mb-4 overflow-hidden">
+  <img src={product.image} alt={product.name} className="h-full object-contain" />
+</div>
               <h4 className="font-medium mb-1">{product.name}</h4>
               <p className="text-red-500 font-semibold">{product.price}</p>
               <button className="mt-3 w-full bg-black text-white py-2 rounded text-sm">
