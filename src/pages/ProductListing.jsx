@@ -1,15 +1,19 @@
-function ProductListing() {
-  const products = [
-    { name: "HAVIT HV-G92 Gamepad", price: "$120" },
-    { name: "AK-900 Wired Keyboard", price: "$960" },
-    { name: "IPS LCD Gaming Monitor", price: "$370" },
-    { name: "S-Series Comfort Chair", price: "$375" },
-    { name: "Breed Dry Dog Food", price: "$100" },
-    { name: "CANON EOS DSLR Camera", price: "$360" },
-    { name: "ASUS FHD Gaming Laptop", price: "$700" },
-    { name: "Curology Product Set", price: "$500" },
-  ]
 
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+function ProductListing() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+  axios.get("http://localhost:5000/api/products")
+    .then((res) => {
+      setProducts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
   return (
     <div className="px-10 py-10">
       <h2 className="text-3xl font-bold mb-8">All Products</h2>
