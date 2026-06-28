@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 // DB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect('mongodb+srv://yasirkhan220105_db_user:Yasirhero@cluster0.ipe0hku.mongodb.net/ecommerce?retryWrites=true&w=majority')
   .then(() => {
     console.log('MongoDB connected successfully!');
     app.listen(process.env.PORT, () => {
