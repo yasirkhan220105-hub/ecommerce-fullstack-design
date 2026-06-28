@@ -24,7 +24,7 @@ const products = [
     price: 29.99,
     category: 'Accessories',
     stock: 50,
-    image: 'https://images.unsplash.com/photo-1627123424574-724758594785?w=300',
+   image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300',
     description: 'Slim and durable genuine leather wallet.'
   },
   {
