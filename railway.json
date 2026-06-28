@@ -4,6 +4,6 @@
     "buildCommand": "cd server && npm install"
   },
   "deploy": {
-    "startCommand": "cd server && node server.js"
+    "startCommand": "cd server && node --experimental-global-webcrypto server.js"
   }
 }
