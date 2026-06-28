@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+const { protect, adminOnly } = require('../middleware/auth');
 
 // GET all products (with search)
 router.get('/', async (req, res) => {
@@ -29,7 +30,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST create product
-router.post('/', async (req, res) => {
+router.post('/', protect, adminOnly, async (req, res) => {
   try {
     const product = new Product(req.body);
     const saved = await product.save();
@@ -40,7 +41,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update product
-router.put('/:id', async (req, res) => {
+router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
     const updated = await Product.findByIdAndUpdate(
       req.params.id, req.body, { new: true }
@@ -52,7 +53,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE product
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, adminOnly, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: 'Product deleted' });
