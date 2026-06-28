@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ function ProductListing() {
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product, index) => (
-          <div key={index} className="border rounded-lg p-4 hover:shadow-md transition">
+          <Link to={`/products/${product._id}`} key={index} className="border rounded-lg p-4 hover:shadow-md transition block">
             <div className="bg-gray-100 h-40 flex items-center justify-center rounded mb-4 overflow-hidden">
   <img src={product.image} alt={product.name} className="h-full object-contain" />
 </div>
@@ -29,7 +29,7 @@ function ProductListing() {
             <button className="mt-3 w-full bg-black text-white py-2 rounded text-sm">
               Add To Cart
             </button>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
