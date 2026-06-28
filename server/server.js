@@ -1,3 +1,6 @@
+import { webcrypto } from 'crypto';
+globalThis.crypto = webcrypto;
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -22,9 +25,9 @@ app.get('/', (req, res) => {
 mongoose.connect('mongodb+srv://yasirkhan220105_db_user:Yasirhero@cluster0.ipe0hku.mongodb.net/ecommerce?retryWrites=true&w=majority')
   .then(() => {
     console.log('MongoDB connected successfully!');
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-    });
+   app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
+});
   })
   .catch(err => {
     console.log('Connection error:', err);
